@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Form.css';
 
@@ -13,10 +14,15 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+
+      // ✅ Store token and role in cookies
+      Cookies.set('token', res.data.token, { expires: 1 }); // expires in 1 day
+      Cookies.set('role', res.data.user.role);
+
       setMessage('Login successful! Redirecting...');
       setTimeout(() => {
-        navigate('/'); // ✅ redirect to home
-      }, 1500);
+        navigate('/problems'); // ✅ redirect to problem list
+      }, 1000);
     } catch (err) {
       setMessage('Invalid email or password');
     }

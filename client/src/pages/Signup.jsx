@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Form.css';
+import Cookies from 'js-cookie';
 
 export default function Signup() {
   const [name, setName] = useState('');

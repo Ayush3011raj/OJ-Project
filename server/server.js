@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/problems', require('./routes/problems'));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import '../styles/Home.css';
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      navigate('/problems');
+    }
+  }, []);
+
   return (
     <div className="home-container">
       <h1 className="home-title">Welcome to <span className="highlight">Ayushforces</span></h1>
