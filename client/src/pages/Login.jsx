@@ -18,7 +18,8 @@ export default function Login() {
       // ✅ Store token and role in cookies
       Cookies.set('token', res.data.token, { expires: 1 }); // expires in 1 day
       Cookies.set('role', res.data.user.role);
-
+      Cookies.set('userId', res.data.user._id);
+      console.log(res.data);
       setMessage('Login successful! Redirecting...');
       setTimeout(() => {
         navigate('/problems'); // ✅ redirect to problem list
