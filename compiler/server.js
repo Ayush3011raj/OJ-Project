@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const { runSubmission } = require('./index');                        
+const { runSubmission } = require('./index'); 
+const { runCustom } = require('./runCustom');                       
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -32,6 +33,20 @@ app.post('/run', async (req, res) => {
   } catch (err) {
     console.error('Execution Error:', err);
     res.status(500).json({ success: false, error: err.message || 'Execution error' });
+  }
+});
+app.post('/run-custom', async (req, res) => {
+  const { code, language, input } = req.body;
+
+  if (!code || !language) {
+    return res.status(400).json({ success: false, error: 'Missing code or language' });
+  }
+
+  try {
+    const result = await runCustom({ code, language, input });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ success: false, error: 'Server Error: ' + err.message });
   }
 });
 

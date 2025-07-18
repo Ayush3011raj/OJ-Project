@@ -10,7 +10,9 @@ export default function ProblemDetails() {
   const [language, setLanguage] = useState('cpp');
   const [code, setCode] = useState('');
   const [result, setResult] = useState('');
-  const [aiFeedback, setAiFeedback] = useState(''); // 🆕 for AI review output
+  const [aiFeedback, setAiFeedback] = useState('');
+  const [customInput, setCustomInput] = useState('');
+  const [customOutput, setCustomOutput] = useState('');
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/problems/${id}`)
@@ -32,7 +34,6 @@ export default function ProblemDetails() {
         problemId: id,
         userId
       });
-
       setResult(res.data.success ? `✅ ${res.data.result}` : `❌ Error: ${res.data.error}`);
     } catch (err) {
       console.error('Submission Error:', err.response?.data || err.message);
@@ -51,6 +52,21 @@ export default function ProblemDetails() {
     }
   };
 
+  const handleRun = async () => {
+    setCustomOutput('⏳ Running with custom input...');
+    try {
+      const res = await axios.post('http://localhost:8000/run-custom', {
+        code,
+        language,
+        input: customInput
+      });
+      setCustomOutput(res.data.success ? res.data.output : `❌ Error: ${res.data.error}`);
+    } catch (err) {
+      console.error('Custom Run Error:', err);
+      setCustomOutput('❌ An error occurred while running the code.');
+    }
+  };
+
   if (!problem) return <p>Loading problem...</p>;
 
   return (
@@ -62,7 +78,7 @@ export default function ProblemDetails() {
       </div>
 
       <div className="submission-panel">
-        <h3>Submit Solution</h3>
+        <h3>Code Editor</h3>
 
         <label>Language:</label>
         <select value={language} onChange={e => setLanguage(e.target.value)}>
@@ -76,13 +92,31 @@ export default function ProblemDetails() {
           placeholder="Write your code here..."
         />
 
-        <button className="btn primary" onClick={handleSubmit}>Submit</button>
-        <button className="btn secondary" onClick={handleAIReview}>AI Review</button>
+        <label style={{ marginTop: '1rem' }}>Custom Input:</label>
+        <textarea
+          rows="5"
+          value={customInput}
+          onChange={e => setCustomInput(e.target.value)}
+          placeholder="Enter custom input here..."
+        />
+
+        <div className="button-group">
+          <button className="btn primary" onClick={handleRun}>Run</button>
+          <button className="btn success" onClick={handleSubmit}>Submit</button>
+          <button className="btn secondary" onClick={handleAIReview}>AI Review</button>
+        </div>
+
+        {customOutput && (
+          <div className="custom-output-box">
+            <strong>Custom Output:</strong>
+            <pre>{customOutput}</pre>
+          </div>
+        )}
 
         {result && (
-          <div className="result-box" style={{ marginTop: '1rem' }}>
-            <strong>Verdict:</strong><br />
-            <span style={{ color: result.startsWith('✅') ? 'green' : 'red' }}>{result}</span>
+          <div className="result-box">
+            <strong>Verdict:</strong>
+            <pre style={{ color: result.startsWith('✅') ? 'green' : 'red' }}>{result}</pre>
           </div>
         )}
 
