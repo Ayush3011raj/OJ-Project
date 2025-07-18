@@ -35,3 +35,28 @@
 .submission-panel button {
   margin-top: 1rem;
 }
+
+.btn.secondary {
+  background-color: #673ab7;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn.secondary:hover {
+  background-color: #5e35b1;
+}
+
+.result-box, .ai-feedback-box {
+  background: #fafafa;
+  border-left: 4px solid #2196f3;
+  padding: 1rem;
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+}

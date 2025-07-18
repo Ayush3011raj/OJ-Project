@@ -11,7 +11,6 @@ const testCaseSchema = new mongoose.Schema({
 });
 const TestCase = mongoose.model('TestCase', testCaseSchema);
 
-// Connect and insert
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log('✅ Connected to MongoDB');

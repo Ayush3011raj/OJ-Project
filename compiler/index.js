@@ -3,12 +3,13 @@ const { generateFile } = require('./generateFile');
 const { generateInputFile } = require('./generateInputFile');
 const { executeCpp } = require('./executeCpp');
 
-// ✅ Define local TestCase schema using the same Mongoose instance
+
 const testCaseSchema = new mongoose.Schema({
   problemId: { type: mongoose.Schema.Types.ObjectId, ref: 'Problem', required: true },
   input: { type: String, required: true },
   output: { type: String, required: true }
 });
+
 const submissionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   problemId: { type: mongoose.Schema.Types.ObjectId, ref: 'Problem', required: true },
@@ -49,6 +50,10 @@ const runSubmission = async ({ userId, language, code, problemId }) => {
       break;
     }
   }
+  console.log('Saving submission with:', {
+  userId, problemId, language, verdict
+});
+
 
   await Submission.create({
     userId,
