@@ -12,7 +12,7 @@ export default function AddProblem() {
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/problems', form, {
+    await axios.post('http://13.203.102.213:5000/api/problems', form, {
       headers: { Authorization: `Bearer ${token}` }
     });
     navigate('/problems');

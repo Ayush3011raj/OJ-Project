@@ -11,14 +11,14 @@ export default function EditProblem() {
   const token = Cookies.get('token');
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/problems/${id}`)
+    axios.get(`http://13.203.102.213:5000/api/problems/${id}`)
       .then(res => setForm(res.data));
   }, [id]);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async e => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/api/problems/${id}`, form, {
+    await axios.put(`http://13.203.102.213:5000/api/problems/${id}`, form, {
       headers: { Authorization: `Bearer ${token}` }
     });
     navigate('/problems');

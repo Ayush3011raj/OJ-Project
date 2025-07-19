@@ -10,13 +10,13 @@ export default function Problems() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/problems')
+    axios.get('http://13.203.102.213:5000/api/problems')
       .then(res => setProblems(res.data));
 
     const token = Cookies.get('token');
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      axios.get('http://localhost:5000/api/auth/me', {
+      axios.get('http://13.203.102.213:5000/api/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         if (res.data.role === 'admin') setIsAdmin(true);
@@ -48,7 +48,7 @@ export default function Problems() {
                   <Link to={`/edit-problem/${p._id}`}><button>Edit</button></Link>
                   <button onClick={async () => {
                    const token = Cookies.get('token');
-                    await axios.delete(`http://localhost:5000/api/problems/${p._id}`, {
+                    await axios.delete(`http://13.203.102.213:5000/api/problems/${p._id}`, {
                       headers: { Authorization: `Bearer ${token}` }
                     });
                     setProblems(problems.filter(pr => pr._id !== p._id));

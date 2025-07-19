@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Problems from './pages/Problems';
-import AddProblem from './pages/Addproblem';
+import Problems from './pages/problems';
+import AddProblem from './pages/AddProblem';
 import EditProblem from './pages/EditProblem';
 import ProblemDetails from './pages/ProblemDetails';
 

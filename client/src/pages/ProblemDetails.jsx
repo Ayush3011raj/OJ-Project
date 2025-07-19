@@ -15,7 +15,7 @@ export default function ProblemDetails() {
   const [customOutput, setCustomOutput] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/problems/${id}`)
+    axios.get(`http://13.203.102.213:5000/api/problems/${id}`)
       .then(res => setProblem(res.data))
       .catch(err => console.error('Error loading problem:', err));
   }, [id]);
@@ -28,7 +28,7 @@ export default function ProblemDetails() {
     }
     setResult('⏳ Evaluating...');
     try {
-      const res = await axios.post('http://localhost:8000/run', {
+      const res = await axios.post('http://13.203.102.213:8000/run', {
         code,
         language,
         problemId: id,
@@ -44,7 +44,7 @@ export default function ProblemDetails() {
   const handleAIReview = async () => {
     setAiFeedback('🤖 Reviewing your code with AI...');
     try {
-      const res = await axios.post('http://localhost:5000/ai-review', { code, language });
+      const res = await axios.post('http://13.203.102.213:5000/ai-review', { code, language });
       setAiFeedback(res.data.feedback || 'No feedback available.');
     } catch (err) {
       console.error('AI Review Error:', err);
@@ -55,7 +55,7 @@ export default function ProblemDetails() {
   const handleRun = async () => {
     setCustomOutput('⏳ Running with custom input...');
     try {
-      const res = await axios.post('http://localhost:8000/run-custom', {
+      const res = await axios.post('http://13.203.102.213:8000/run-custom', {
         code,
         language,
         input: customInput

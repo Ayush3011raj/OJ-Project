@@ -14,7 +14,7 @@ export default function Signup() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/signup', {
+      await axios.post('http://13.203.102.213:5000/api/auth/signup', {
         name,
         email,
         password
