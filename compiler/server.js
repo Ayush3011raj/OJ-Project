@@ -8,7 +8,7 @@ const { runCustom } = require('./runCustom');
 const app = express();
 const allowedOrigins = [
   'http://localhost:5173',         
-  'https://oj-project.vercel.app'  
+  'https://oj-project-beta.vercel.app'  
 ];
 app.use(cors({
   origin: function (origin, callback) {
