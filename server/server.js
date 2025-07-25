@@ -7,7 +7,7 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',         // for local frontend
-  'https://oj-project.vercel.app'  // for deployed frontend
+  'https://oj-project-beta.vercel.app'  // for deployed frontend
 ];
 
 app.use(cors({
