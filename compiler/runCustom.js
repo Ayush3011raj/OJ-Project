@@ -1,6 +1,6 @@
 const { generateFile } = require('./generateFile');
 const { generateInputFile } = require('./generateInputFile');
-const { executeCpp } = require('./executeCpp');
+const { executeCpp } = require('./executecpp');
 
 const runCustom = async ({ code, language, input }) => {
   if (!code) throw new Error('No code provided');

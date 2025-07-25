@@ -86,3 +86,23 @@
   background-color: #007bff;
   color: white;
 }
+
+.submission-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.submission-table th,
+.submission-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.btn.small {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+

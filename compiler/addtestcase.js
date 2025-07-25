@@ -15,23 +15,28 @@ mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log('✅ Connected to MongoDB');
 
-    const problemId = new mongoose.Types.ObjectId('6854381492b8027314e097e2'); // update as needed
+    const problemId = new mongoose.Types.ObjectId('6854380592b8027314e097df'); // update as needed
 
     const testCases = [
       {
         problemId,
-        input: '3\n5\n',
-        output: '8\n'
+        input: '3 5',
+        output: '2'
       },
       {
         problemId,
-        input: '10\n-2\n',
-        output: '8\n'
+        input: '10 2',
+        output: '8'
       },
       {
         problemId,
-        input: '0\n0\n',
-        output: '0\n'
+        input: '8 4',
+        output: '4'
+      },
+      {
+        problemId,
+        input: '5 5',
+        output: '0'
       }
     ];
 

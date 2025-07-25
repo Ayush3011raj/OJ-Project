@@ -4,9 +4,29 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+const allowedOrigins = [
+  'http://localhost:5173',         // for local frontend
+  'https://oj-project.vercel.app'  // for deployed frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const submissionRoutes = require('./routes/submissionRoutes');
+app.use('/api/submissions', submissionRoutes);
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/problems', require('./routes/problems'));

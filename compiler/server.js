@@ -6,7 +6,21 @@ require('dotenv').config();
 const { runSubmission } = require('./index'); 
 const { runCustom } = require('./runCustom');                       
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',         
+  'https://oj-project.vercel.app'  
+];
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));  
 app.use(express.json()); 

@@ -19,7 +19,7 @@ export default function Home() {
       <p className="home-subtitle">Your Coding Journey Starts Here 🚀</p>
       <div className="home-buttons">
         <Link to="/login"><button className="btn primary">Login</button></Link>
-        <Link to="/signup"><button className="btn secondary">Signup</button></Link>
+        <Link to="/signup"><button className="btn primary">Signup</button></Link>
       </div>
     </div>
   );
